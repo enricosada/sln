@@ -799,6 +799,29 @@ namespace Microsoft.Build.Construction
                         line = ReadLine();
                     }
                 }
+#if FULL_SLN_PARSER
+                else if (line.StartsWith("ProjectSection(SolutionItems)", StringComparison.Ordinal))
+                {
+                    // We have a SolutionItems section.  Each subsequent line should identify
+                    // a solution item.
+                    line = ReadLine();
+                    while ((line != null) && (!line.StartsWith("EndProjectSection", StringComparison.Ordinal)))
+                    {
+                        proj.ProjectType = SolutionProjectType.SolutionFolder;
+
+                        // This should be a dependency.  The GUID identifying the parent project should
+                        // be both the property name and the property value.
+                        Match match = s_crackPropertyLine.Value.Match(line);
+                        if (match.Success)
+                        {
+                            string relativeFilePath = match.Groups["PROPERTYNAME"].Value.Trim();
+                            proj.AddFolderFile(relativeFilePath);
+                        }
+
+                        line = ReadLine();
+                    }
+                }
+#endif
                 else if (line.StartsWith("ProjectSection(WebsiteProperties)", StringComparison.Ordinal))
                 {
                     // We have a WebsiteProperties section.  This section is present only in Venus

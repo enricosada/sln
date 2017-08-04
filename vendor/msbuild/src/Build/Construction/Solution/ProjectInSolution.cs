@@ -103,6 +103,10 @@ namespace Microsoft.Build.Construction
         private string _targetFrameworkMoniker; // used for website projects, since they don't have a project file in which the
                                                 // target framework is stored.  Defaults to .NETFX 3.5
 
+#if FULL_SLN_PARSER
+        private List<string> _folderFiles; // A list of name and path of files inside a solution folder
+#endif
+
         /// <summary>
         /// The project configuration in given solution configuration
         /// K: full solution configuration name (cfg + platform)
@@ -133,6 +137,10 @@ namespace Microsoft.Build.Construction
             _aspNetConfigurations = new Hashtable(StringComparer.OrdinalIgnoreCase);
 
             _projectConfigurations = new Dictionary<string, ProjectConfigurationInSolution>(StringComparer.OrdinalIgnoreCase);
+
+#if FULL_SLN_PARSER
+            _folderFiles = new List<string>();
+#endif
         }
 
         #endregion
@@ -251,6 +259,16 @@ namespace Microsoft.Build.Construction
             get { return _targetFrameworkMoniker; }
             set { _targetFrameworkMoniker = value; }
         }
+
+#if FULL_SLN_PARSER
+        /// <summary>
+        /// Only apply to solution folder
+        /// </summary>
+        public IReadOnlyList<string> FolderFiles
+        {
+            get { return _folderFiles.AsReadOnly(); }
+        }
+#endif
 
         #endregion
 
@@ -410,6 +428,16 @@ namespace Microsoft.Build.Construction
 
             _uniqueProjectName = newUniqueName;
         }
+
+#if FULL_SLN_PARSER
+        /// <summary>
+        /// Add the folder file.
+        /// </summary>
+        internal void AddFolderFile(string relativeFilePath)
+        {
+            _folderFiles.Add(relativeFilePath);
+        }
+#endif
 
         /// <summary>
         /// Cleanse the project name, by replacing characters like '@', '$' with '_'
