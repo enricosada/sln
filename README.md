@@ -7,8 +7,7 @@ sln parser
 to create packages:
 
 ```
-set VERSION=1.2.3
-build.cmd
+dotnet msbuild build.proj
 ```
 
-will create packages with version `1.2.3` in `artifacts\nupkgs`
+will create packages in `build\nupkgs`

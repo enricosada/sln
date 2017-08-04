@@ -1,0 +1,18 @@
+<Project ToolsVersion="15.0">
+
+    <PropertyGroup>
+        <RepoRoot>$(MSBuildThisFileDirectory.TrimEnd('\\').TrimEnd('/'))</RepoRoot>
+        <ArtifactsDir>$(RepoRoot)/build</ArtifactsDir>
+        
+        <PackageVersion>0.1.0</PackageVersion>
+    </PropertyGroup>
+
+    <Target Name="Build">
+
+        <Exec Command='dotnet restore $(RepoRoot)/src/Sln/Sln.csproj /p:Version=$(PackageVersion)' />
+
+        <Exec Command='dotnet pack $(RepoRoot)/src/Sln/Sln.csproj -c Release --output $(ArtifactsDir)/nupkgs /p:Version=$(PackageVersion)' />
+
+    </Target>
+
+</Project>

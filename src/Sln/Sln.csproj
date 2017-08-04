@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <Description>Parse sln files</Description>
+    <DefineConstants>FULL_SLN_PARSER;STANDALONEBUILD;$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\..\vendor\msbuild\src\Shared\ErrorUtilities.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\VisualStudioConstants.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\Constants.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\Traits.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\BuildEventFileInfo.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\EscapingUtilities.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\StringBuilderCache.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\OpportunisticIntern.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Shared\ProjectFileErrorUtilities.cs" /> 
+    <Compile Include="..\..\vendor\msbuild\src\Build\Errors\InvalidProjectFileException.cs" /> 
+    <Compile Include="..\..\vendor\msbuild\src\Build\Construction\Solution\ProjectConfigurationInSolution.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Build\Construction\Solution\ProjectInSolution.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Build\Construction\Solution\SolutionConfigurationInSolution.cs" />
+    <Compile Include="..\..\vendor\msbuild\src\Build\Construction\Solution\SolutionFile.cs" />
+  </ItemGroup>
+
+</Project>
