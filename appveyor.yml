@@ -1,0 +1,11 @@
+os:
+  - Visual Studio 2017
+
+build_script:
+  - cmd: dotnet msbuild build.proj
+
+test: off
+
+artifacts:
+  - path: build\nupkgs\*.nupkg
+    name: nupkgs
